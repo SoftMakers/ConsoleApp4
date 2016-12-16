@@ -99,6 +99,14 @@ class Poli
     public Poli(int x) : this(x, x) { } 
 
 }
+// необязательные и именование параметры
+class Pamametrs
+{
+    public static int Sum (int x, int y=0, int z=0)
+    {
+        return x+y+z;
+    }
+}
 
 class ConsoleApp
 {
@@ -107,26 +115,31 @@ class ConsoleApp
         MethodsParametrs obj1 = new MethodsParametrs();
         int c = new int();
         int b = new int();
-        // модификатори параметров
+        // Модификатори параметров
+        Console.WriteLine("\n Модификатори параметров\n");
         int a =100;
         Console.WriteLine("Обьект до визова метода содержит аргументи: {0}, {1}, {2}", a, b, c);
         c = obj1.ChParam(ref a,out b);
         Console.WriteLine("После вызова метода обьект содержит аргументи: {0}, {1}, {2}", a, b, c);
-        // параметри метода по значению не изменяют аргументов
+        // Параметри метода по значению не изменяют аргументов
+        Console.WriteLine("\nПараметри метода по значению не изменяют аргументов\n");
         obj1.NoChange(c, b);
         Console.WriteLine("Переменние с,b значимого типа обьявлени с помощью конструктора класа");
         Console.WriteLine("переданние методу в качестве параметров по значению содержат {0} и {1}", c, b);
-        // возврат болеe одного значения из методов модификатором параметра out
+        // Возврат болеe одного значения из методов модификатором параметра out
+        Console.WriteLine("\nВозврат болеe одного значения из методов модификатором параметра out\n");
         int t = new int();
         int h = new int();
         obj1.OutExample(t, h, out t, out h);
         Console.WriteLine("Возврат 2-х значений из метода посредством модификатора out: {0}, {1}", t, h);
-        // возврат болеe одного значения из методов модификатором параметра ref
+        // Возврат болеe одного значения из методов модификатором параметра ref
+        Console.WriteLine("\nВозврат болеe одного значения из методов модификатором параметра ref\n");
         int u = new int();
         int k = new int();
         obj1.RefExample(ref u, ref k);
         Console.WriteLine("Возврат 2-х значений из метода посредством модификатора ref: {0}, {1}", u, k);
-        // использование модификаторов параметров для ссылочных типов данных
+        // Использование модификаторов параметров для ссылочных типов данных
+        Console.WriteLine("\nИспользование модификаторов параметров для ссылочных типов данных\n");
         ChangeLink x = new ChangeLink(1, 2);
         ChangeLink y = new ChangeLink(3, 4);
         Console.Write("x до вызова : "); x.Show();
@@ -137,18 +150,21 @@ class ConsoleApp
         y.Change(ref y, ref x);
         Console.Write("x после повторного вызова : "); x.Show();
         Console.Write("y после повторного вызова : "); y.Show();
-        // переменное число параметров
+        // Переменное число параметров
+        Console.WriteLine("\nПеременное число параметров\n");
         Min ob = new Min();
         int min;
         int o = 10, l = 15, p = 20;        
         min = ob.MinVal(p);
         Console.WriteLine("Минимальное {0}", min);
-        //возврат обьектов из методов
+        // Возврат обьектов из методов
+        Console.WriteLine("\nВозврат обьектов из методов\n");
         Rect prm1 = new Rect(4, 5);
         prm1 = prm1.Scale(50);
         Rect prm2 = new Rect(1, 2);
         Console.WriteLine("prm1.z:{0}, prm1.x:{1}, prm2.z:{2}, prm2.x:{3}", prm1.z, prm1.x ,prm2.z, prm2.x);
-        // полиморфизм, перегрузка конструкторов, перегрузка this, инициализатори обектов
+        // Полиморфизм, перегрузка конструкторов, перегрузка this, инициализатори обектов
+        Console.WriteLine("\nПолиморфизм, перегрузка конструкторов, перегрузка this, инициализатори обектов\n");
         Poli morf1 = new Poli();
         Poli morf2 = new Poli(5);
         Poli morf3 = new Poli(10,10);
@@ -158,8 +174,15 @@ class ConsoleApp
         Console.WriteLine("Параметри при инициализации:()            morf1.x: {0}, morf1.y: {1}", morf1.x, morf1.y);
         Console.WriteLine("Параметри при инициализации:(5)           morf2.x: {0}, morf2.y: {1}", morf2.x, morf2.y);
         Console.WriteLine("Параметри при инициализации:(10,10)       morf3.x: {0}, morf3.y: {1}", morf3.x, morf3.y);
-        Console.WriteLine("Параметри при инициализации:{x=15,y=15}   morf4.x: {0}, morf4.y: {1}", morf4.x, morf4.y);
-        Console.WriteLine("Параметри при инициализации:{x=20}        morf5.x: {0}, morf5.y: {1}", morf5.x, morf5.y);
+        Console.WriteLine(@"Параметри при инициализации:(x=15,y=15)   morf4.x: {0}, morf4.y: {1}", morf4.x, morf4.y);
+        Console.WriteLine(@"Параметри при инициализации:(x=20)        morf5.x: {0}, morf5.y: {1}", morf5.x, morf5.y);
+        // Необязательные и именование параметры
+        Console.WriteLine("\nНеобязательные и именование параметры\n");
+        Console.WriteLine("Sum(10): " + Pamametrs.Sum(10));
+        Console.WriteLine("Sum(10,11,12): " + Pamametrs.Sum(10,11,12));
+        Console.WriteLine("Sum(10,13): " + Pamametrs.Sum(10,13));
+        Console.WriteLine("Sum(14,z:15): " + Pamametrs.Sum(14,z:15));
+
 
         Console.Read();
     }
