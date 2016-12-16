@@ -121,6 +121,25 @@ class Pamametrs
         return x+y+z;
     }
 }
+// рекурсия
+class Recursion 
+{
+    public static void Recursor (string i)
+    {
+        if(i.Length > 0) Recursor(i.Substring(1,i.Length-1)); 
+        else return; 
+        Console.Write(i[0]);
+    }
+    public static int Fact (int j)
+    {
+        int result=0;
+        if (j==0) return result;
+        else if (j==1) result=1;
+        else result = j * Fact(j-1);
+        Console.Write("\t"+j);
+        return result;        
+    }       
+}
 
 class ConsoleApp
 {
@@ -206,6 +225,15 @@ class ConsoleApp
         Console.WriteLine("\tSum(10,13): " + Pamametrs.Sum(10,13));
         Console.WriteLine("\tSum(14,z:15): " + Pamametrs.Sum(14,z:15));
         Console.WriteLine("\tSum(x:16,z:17): " + Pamametrs.Sum(x:16,z:17));
+
+        // Рекурсия
+        Console.WriteLine("\nРекурсия\n");
+        string str="This is test!";
+        Console.WriteLine("\tЭто исходная строка: "+str);
+        Console.Write("\tЭто строка после рекурсии: ");   
+        Recursion.Recursor(str);
+        Console.WriteLine("\n\nРекурсия\n");
+        Console.WriteLine("\t"+Recursion.Fact(9));        
 
         Console.Read();
     }
