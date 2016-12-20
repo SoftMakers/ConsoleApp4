@@ -140,6 +140,52 @@ class Recursion
         return result;        
     }       
 }
+// перегрузка операторов
+class ThreeD 
+{
+    public int a,b,c;
+    public ThreeD () : this (0,0,0) {}    
+    public ThreeD (int a, int b, int c) 
+    {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+    public static ThreeD operator + (ThreeD obj1,ThreeD obj2)
+    {
+        ThreeD result = new ThreeD();
+        result.a = obj1.a + obj2.a;
+        result.b = obj1.b + obj2.b;
+        result.c = obj1.c + obj2.c;
+        return result;
+    }
+
+    //public static ThreeD operator + (ThreeD obj1,ThreeD obj2) {
+    //return new ThreeD( obj1.a + obj2.a, obj1.b + obj2.b, obj1.c + obj2.c ); }        
+    
+
+    public static explicit operator ThreeD (int i)
+    {
+        ThreeD result = new ThreeD(i,i,i);
+        return result;
+    }
+
+    //public static implicit operator ThreeD (int i) {
+    //return new ThreeD(i,i,i); }
+}
+// cтатический класс
+static class Static
+{
+    private static int a;
+    public static void Show ()
+    {
+        Console.Write(a);
+    }
+    public static void Set (int i)
+    {
+        a = i;
+    }         
+}
 
 class ConsoleApp
 {
@@ -235,6 +281,22 @@ class ConsoleApp
         Console.WriteLine("\n\nРекурсия\n");
         Console.WriteLine("\t"+Recursion.Fact(9));        
 
+        // Перегрузка операторов
+         Console.WriteLine("\n Перегрузка операторов\n");
+        ThreeD tobj1 = new ThreeD(1,2,3);
+        ThreeD tobj2 = new ThreeD(10,10,10);
+        int i=5;
+        tobj2 += tobj1;
+        Console.WriteLine("\tОбьект tobj2 после выражения tobj2 += tobj1 : {0}, {1}, {2}", tobj2.a, tobj2.b, tobj2.c);
+        tobj1 = (ThreeD)i;
+        Console.WriteLine("\tОбьект tobj1 после выражения tobj1 = (int)i : {0}, {1}, {2}", tobj1.a, tobj1.b, tobj1.c);
+        
+        // Cтатический класс
+        Console.WriteLine("\n Cтатический класс\n");
+        Console.Write("\t");
+        Static.Set(25);
+        Static.Show();
+        
         Console.Read();
     }
 }
