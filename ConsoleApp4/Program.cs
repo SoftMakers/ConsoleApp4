@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Media;
+
 class MethodsParametrs
 {
     // модификатори параметров 
@@ -31,7 +33,7 @@ class MethodsParametrs
         y = 765;
         j = 987;
     }
-}
+} 
 // использование модификаторов параметров для ссылочных типов данных
 class ChangeLink
 {
@@ -56,7 +58,7 @@ class ChangeLink
         obj2 = container;
     }
 }
-// переменное число паракметров. Модификатор PARAMS
+// переменное число параметров. Модификатор PARAMS
 class Min
 {
     public int MinVal (params int[] nums)
@@ -179,50 +181,170 @@ static class Static
     private static int a;
     public static void Show ()
     {
-        Console.Write(a);
+        Console.WriteLine(a);
     }
     public static void Set (int i)
     {
         a = i;
     }         
 }
+// Свойства класса
+class EskdCode 
+{
+    // конструктор
+    public EskdCode (string specifikator, int clasifikator, int number, int version=-1)
+    {
+        this.Specifikator = specifikator;
+        this.Clasifikator = clasifikator;
+        this.Number = number;
+        this.Version = version;
+    }
+    // поля
+    private int code_type; // if 1 then version not null
+    private string specifikator;
+    private int clasifikator;
+    private int number;
+    private int version;    
+    // свойства
+    public string Specifikator 
+
+    {
+        get
+        {
+            return specifikator;
+        }
+        set
+        {
+            if (value=="АЖИЮ" || value=="ГАРК" || value=="ПЦЮИ") specifikator = value;
+        }
+    } 
+    public int Clasifikator 
+    {
+        get
+        {
+            return clasifikator;
+        }
+        set
+        {
+            if (value>0 & value <1000000) clasifikator = value;
+        }
+    }
+    public int Number 
+    {
+        get
+        {
+            return number;
+        }
+        set
+        {
+            if (value>0 & value <1000) number = value;
+        }
+    }
+    public int Version 
+    {
+        get
+        {
+            return version;
+        }
+        set
+        {
+            if (value>0 & value <1000) version = value;
+            else version = -1;
+        }
+    }
+    // методы
+     public static EskdCode operator + (EskdCode obj1, EskdCode obj2)
+        {   
+            EskdCode result = new EskdCode("",0,0);
+            result.specifikator = obj1.specifikator + obj2.specifikator;
+            result.clasifikator = obj1.clasifikator + obj2.clasifikator;
+            result.number = obj1.number + obj2.number;
+            if (obj1.Version == -1 & obj2.Version == -1)    result.version = -1;
+            else if (obj1.Version == -1) result.version = obj2.Version;
+            else if (obj2.Version == -1) result.version = obj1.Version;
+            else result.version = obj1.Version + obj2.Version;
+            return result;
+        }
+    public string GetFullCode()
+    {
+        string result="";
+        result = Specifikator + ".";
+        result += Clasifikator + ".";
+        result += Number;
+        if (Version != -1) result += "." + Version;
+        return result;
+    }
+
+}
+// Наследование, модификатор доступа protected
+class BaseClass                          
+{                                       
+    protected int a { get; set; }       
+    protected int b { get; set; }       
+    public BaseClass() : this(0,0) {}   
+    public BaseClass(int a=0, int b=0)  
+    {                                   // если в базовом класе обявлен явный
+        this.a = a;                     // конструктор (кроме конструкторов с 
+        this.b = b;                     // параметрами по умолчанию) и отсутствует 
+    }                                   // перегрузка неявного конструктора (без 
+}                                       // параметров) в производном класе необходимо 
+class DotherClass : BaseClass           // обьявить явний конструктор для инициализации 
+{                                       // параметров конструктора базового класса с           
+    private int c { get; set; }         // перегрузкой наследуемого конструктора базового класа                           
+    public DotherClass() : this(0,0,0) {}                       
+    public DotherClass(int a=0, int b=0, int c=0) : base (a,b)   
+    {                                                            
+        this.c = c;                                                        
+    }                                                           
+    public void Show()
+    {
+        Console.WriteLine("\ta:{0}\tb:{1},\tc:{2}",a,b,c);
+    }
+}                                                           
 
 class ConsoleApp
 {
-    public static void Main()
+    public static int Main()
     {
         MethodsParametrs obj1 = new MethodsParametrs();
         int c = new int();
         int b = new int();
         
-        // Модификатори параметров
+        Console.Title="Шилдт Г. Руководство C#.";
+        Console.BackgroundColor = ConsoleColor.Gray;
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        
+        if (Console.CapsLock) return 1;                 
+
+        // Модификатори параметров        
         Console.WriteLine("\nМодификатори параметров\n");
         int a =100;
         Console.WriteLine("\tОбьект до визова метода содержит аргументи: {0}, {1}, {2}", a, b, c);
         c = obj1.ChParam(ref a,out b);
         Console.WriteLine("\tПосле вызова метода обьект содержит аргументи: {0}, {1}, {2}", a, b, c);
         
-        // Параметри метода по значению не изменяют аргументов
+        // Параметри метода по значению не изменяют аргументов        
         Console.WriteLine("\nПараметри метода по значению не изменяют аргументов\n");
         obj1.NoChange(c, b);
         Console.WriteLine("\tПеременние с,b значимого типа обьявлени с помощью конструктора класа");
         Console.WriteLine("\tпереданние методу в качестве параметров по значению содержат {0} и {1}", c, b);
         
-        // Возврат болеe одного значения из методов модификатором параметра out
+        // Возврат болеe одного значения из методов модификатором параметра out        
         Console.WriteLine("\nВозврат болеe одного значения из методов модификатором параметра out\n");
         int t = new int();
         int h = new int();
         obj1.OutExample(t, h, out t, out h);
         Console.WriteLine("\tВозврат 2-х значений из метода посредством модификатора out: {0}, {1}", t, h);
         
-        // Возврат болеe одного значения из методов модификатором параметра ref
+        // Возврат болеe одного значения из методов модификатором параметра ref        
         Console.WriteLine("\nВозврат болеe одного значения из методов модификатором параметра ref\n");
         int u = new int();
         int k = new int();
         obj1.RefExample(ref u, ref k);
         Console.WriteLine("\tВозврат 2-х значений из метода посредством модификатора ref: {0}, {1}", u, k);
         
-        // Использование модификаторов параметров для ссылочных типов данных
+        // Использование модификаторов параметров для ссылочных типов данных        
         Console.WriteLine("\nИспользование модификаторов параметров для ссылочных типов данных\n");
         ChangeLink x = new ChangeLink(1, 2);
         ChangeLink y = new ChangeLink(3, 4);
@@ -235,15 +357,15 @@ class ConsoleApp
         Console.Write("\tx после повторного вызова : "); x.Show();
         Console.Write("\ty после повторного вызова : "); y.Show();
         
-        // Переменное число параметров
+        // Переменное число параметров        
         Console.WriteLine("\nПеременное число параметров\n");
         Min ob = new Min();
         int min;
         int o = 10, l = 15, p = 20;        
         min = ob.MinVal(p);
         Console.WriteLine("\tМинимальное {0}", min);
-       
-        // Возврат обьектов из методов
+               
+        // Возврат обьектов из методов        
         Console.WriteLine("\nВозврат обьектов из методов\n");
         Rect prm1 = new Rect(4, 5);
         prm1 = prm1.Scale(50);
@@ -286,17 +408,37 @@ class ConsoleApp
         ThreeD tobj1 = new ThreeD(1,2,3);
         ThreeD tobj2 = new ThreeD(10,10,10);
         int i=5;
-        tobj2 += tobj1;
+        tobj2 += tobj1;        
         Console.WriteLine("\tОбьект tobj2 после выражения tobj2 += tobj1 : {0}, {1}, {2}", tobj2.a, tobj2.b, tobj2.c);
         tobj1 = (ThreeD)i;
         Console.WriteLine("\tОбьект tobj1 после выражения tobj1 = (int)i : {0}, {1}, {2}", tobj1.a, tobj1.b, tobj1.c);
-        
+
+        // Перегрузка операторов v.2
+        Console.WriteLine("\nПерегрузка операторов v.2\n");
+        EskdCode robj1 = new EskdCode("АЖИЮ",111111,111);
+        EskdCode robj2 = new EskdCode("ГАРК",222222,222,2);
+        Console.WriteLine("\t" + robj1.GetFullCode());
+        Console.WriteLine("\t" + robj2.GetFullCode());
+        robj1 = robj1 + robj2;
+        Console.WriteLine("\t" + robj1.GetFullCode());
+
         // Cтатический класс
         Console.WriteLine("\n Cтатический класс\n");
         Console.Write("\t");
         Static.Set(25);
         Static.Show();
+
+        // Наследование, модификатор доступа protected
+        Console.WriteLine("\n Наследование, модификатор доступа protected\n");
+        BaseClass a1 = new BaseClass(5,25);        
+        DotherClass b1 = new DotherClass(83,34,67);
+        b1.Show();
         
+        System.Media.SoundPlayer bep;
+        bep = new SoundPlayer("C:\\Windows\\Media\\Windows Proximity Notification.wav");
+        bep.Play();          
+
         Console.Read();
+        return 0;
     }
 }
