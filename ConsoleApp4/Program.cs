@@ -304,18 +304,19 @@ class DotherClass : BaseClass           // обьявить явний конс�
 
 class ConsoleApp
 {
-    public static int Main()
+    public static int Main ()//out string result)
     {
         MethodsParametrs obj1 = new MethodsParametrs();
         int c = new int();
         int b = new int();
         
-        Console.Title="Шилдт Г. Руководство C#.";
+        Console.Title="Шилдт Г. Руководство C#.";        
+        Console.SetWindowSize(Console.LargestWindowWidth-30,Console.LargestWindowHeight-15);
         Console.BackgroundColor = ConsoleColor.Gray;
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         
-        if (Console.CapsLock) return 1;                 
+        if (Console.CapsLock) return 1;//"TurnOff CAPSLOCK!";                 
 
         // Модификатори параметров        
         Console.WriteLine("\nМодификатори параметров\n");
@@ -439,6 +440,6 @@ class ConsoleApp
         bep.Play();          
 
         Console.Read();
-        return 0;
+        return 0;//"Ok!";
     }
 }
