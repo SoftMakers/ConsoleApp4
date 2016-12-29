@@ -304,7 +304,7 @@ class DotherClass : BaseClass           // обьявить явний конс�
 
 class ConsoleApp
 {
-    public static int Main ()//out string result)
+    public static int Main (string[] args)
     {
         MethodsParametrs obj1 = new MethodsParametrs();
         int c = new int();
