@@ -300,7 +300,41 @@ class DotherClass : BaseClass           // обьявить явний конс�
     {
         Console.WriteLine("\ta:{0}\tb:{1},\tc:{2}",a,b,c);
     }
-}                                                           
+} 
+ // Cокритие членов класса и доступ к ним                   
+class BaseDemo 
+{
+    public int n;
+    public int t;
+    public BaseDemo() : this(0,0) {}
+    public BaseDemo(int x) : this(x,x) {}
+    public BaseDemo(int n, int t)
+    {
+        this.n = n;
+        this.t = t;
+    }
+    public void Show () 
+    {           
+        Console.WriteLine("\tn:{0}\tt:{1}",n,t);        
+    }
+}                  
+class BaseIncapsul: BaseDemo 
+{
+    new public int n;
+    public int f;
+    public BaseIncapsul() : this(0,0) {}
+    public BaseIncapsul(int x) : this(x,x) {}
+    public BaseIncapsul(int n, int f) 
+    {
+        this.n = n;
+        this.f = f;
+    }
+    new public void Show () 
+    {           
+        base.Show();
+        Console.WriteLine("\tn:{0}\tt:{1},\tf:{2}",n,t,f);   
+    }
+}                     
 
 class ConsoleApp
 {
@@ -437,7 +471,13 @@ class ConsoleApp
         
         System.Media.SoundPlayer bep;
         bep = new SoundPlayer("C:\\Windows\\Media\\Windows Proximity Notification.wav");
-        bep.Play();          
+        bep.Play();   
+        
+        // Сокритие членов класса и доступ к ним
+        Console.WriteLine("\n Сокритие членов класса и доступ к ним\n");
+        BaseIncapsul ui1 = new BaseIncapsul(10,10);
+        ui1.Show();
+               
 
         Console.Read();
         return 0;//"Ok!";
